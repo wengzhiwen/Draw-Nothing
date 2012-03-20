@@ -35,7 +35,12 @@
 			<label for="word">Word:</label>
 			<input type="text" name="word" id="word" value=""  />
 		</div>
-		<a href="#" data-role="button" onclick="trans();">Translate to Chinese</a>
+		<a href="#" data-role="button" onclick="trans();" data-theme="a">Translate to Chinese</a>
+		<div data-role="fieldcontain">
+			<label for="chineseword">Chinese Word:</label>
+			<input type="text" name="chineseword" id="chineseword" value=""  />
+		</div>
+		<a href="#" data-role="button" onclick="trans2e();" data-theme="a">Translate to English</a>
 	</div><!-- /content -->
 	<div data-role="footer">
 		<h4>Powered by @zhoushuqun & @718w</h4>
@@ -56,6 +61,10 @@
 
 	function trans() {
 		window.location="http://www.wordreference.com/enzh/" + $("#word").val();
+	}
+
+	function trans2e() {
+		window.location="http://www.wordreference.com/zhen/" + $("#chineseword").val();
 	}
 
 </script>
