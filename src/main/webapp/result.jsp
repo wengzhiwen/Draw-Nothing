@@ -2,6 +2,7 @@
 <%@ page import="net.wengs.drawnothing.*" %>
 <%@ page import="java.util.*" %>
 <jsp:useBean id="drawNothing" class="net.wengs.drawnothing.DrawNothing" scope="application" />
+<jsp:useBean id="translater" class="net.wengs.drawnothing.SdcvTranslater" scope="application" />
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, user-scalable=no″">
@@ -38,7 +39,15 @@
 			<li>
 				<a href="http://www.wordreference.com/enzh/<%=answer%>" rel="external">
 					<h3><%=answer%></h3>
-					<p result="<%=answer%>" class="trans" id="trans<%=answer%>"></p>
+					<p result="<%=answer%>" class="trans" id="trans<%=answer%>">
+						<%
+						try {
+							out.print(translater.translate(answer));
+						} catch (Exception e) {
+							out.print("Translate failed");
+						}
+						%>
+					</p>
 				</a>
 			</li>
 			<%
