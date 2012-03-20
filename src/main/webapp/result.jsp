@@ -23,7 +23,6 @@
 	<div data-role="content">
 		<ul data-role="listview">
 			<%
-			long start = System.currentTimeMillis();
 			String lettersGiven = request.getParameter("letters");
 			String targetCountStr = request.getParameter("count");
 			int targetCount = 0;
@@ -33,7 +32,11 @@
 				targetCount = 3;
 			}
 
+			long start = System.currentTimeMillis();
 			Collection<String> answers = drawNothing.riddle(lettersGiven, targetCount);
+			long end = System.currentTimeMillis();
+
+			long translateStart = System.currentTimeMillis();
 			for(String answer : answers) {
 			%>
 			<li>
@@ -52,9 +55,9 @@
 			</li>
 			<%
 			}
-			long end = System.currentTimeMillis();
+			long translateEnd = System.currentTimeMillis();
 			%>
-			<li>in <%=end - start%>ms</li>
+			<li>in <%=end - start%>ms, translated in <%=translateEnd - translateStart%>ms</li>
 		</ul>
 	</div><!-- /content -->
 
