@@ -27,6 +27,11 @@
 		</div>
 		<input type="submit" value="Give me Hint!" />
 		</form>
+		<div data-role="fieldcontain">
+			<label for="word">Word:</label>
+			<input type="text" name="word" id="word" value=""  />
+		</div>
+		<a href="#" data-role="button" onclick="trans();">Translate to Chinese</a>
 	</div><!-- /content -->
 	<div data-role="footer">
 		<h4>Powered by @zhoushuqun & @718w</h4>
@@ -44,6 +49,10 @@
 		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
+
+	function trans() {
+		window.location="http://www.wordreference.com/enzh/" + $("#word").val();
+	}
 
 </script>
 
