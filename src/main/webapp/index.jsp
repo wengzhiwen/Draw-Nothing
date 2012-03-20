@@ -25,6 +25,10 @@
 			<label for="count">Target Word Length:</label>
 			<input type="range" name="count" id="count" value="5" min="3" max="8" data-highlight="true"  />
 		</div>
+		<div data-role="fieldcontain">
+			<h3>提示</h3>
+			<p>如果你的候选字母中有S，也可以尝试去掉一个S然后减一位查询</p>
+		</div>
 		<input type="submit" value="Give me Hint!" />
 		</form>
 		<div data-role="fieldcontain">
