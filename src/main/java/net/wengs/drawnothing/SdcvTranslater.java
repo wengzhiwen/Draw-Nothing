@@ -17,9 +17,11 @@ public class SdcvTranslater implements Translater {
 	 */
 	public String translate(String word) {
 		try {
-			Process p = Runtime.getRuntime().exec(
-					new String[] { "/usr/local/bin/sdcv", "-n", "-u",
-							"XDICT英汉辞典", word });
+			String[] cmdarray = new String[] { "sdcv", "-n", "-u", "XDICT英汉辞典",
+					word };
+			String[] envp = new String[] { "LANG=en_US.UTF-8",
+					"PATH=/bin:/usr/bin:/usr/local/bin:/opt/local/bin" };
+			Process p = Runtime.getRuntime().exec(cmdarray, envp);
 			InputStream input = p.getInputStream();
 			List<String> lines = IOUtils.readLines(input);
 			StringBuilder sb = new StringBuilder();
@@ -33,6 +35,11 @@ public class SdcvTranslater implements Translater {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	public static void main(String[] args) {
+		String s = new SdcvTranslater().translate("hello");
+		System.out.println(s);
 	}
 
 }
