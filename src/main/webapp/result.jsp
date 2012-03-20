@@ -36,7 +36,7 @@
 			for(String answer : answers) {
 			%>
 			<li>
-				<a href="http://www.wordreference.com/enzh/<%=answer%>">
+				<a href="http://www.wordreference.com/enzh/<%=answer%>" rel="external">
 					<h3><%=answer%></h3>
 					<p result="<%=answer%>" class="trans" id="trans<%=answer%>"></p>
 				</a>
