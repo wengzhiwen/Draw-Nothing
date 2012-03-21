@@ -1,0 +1,3 @@
+Download SUBTLEXus74286wordstextversion.zip from http://subtlexus.lexique.org/
+then extract it and generate the file "freqwords.txt":
+$ awk 'NR>1{print $1}' SUBTLEXus74286wordstextversion.txt > freqwords.txt

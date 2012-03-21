@@ -3,7 +3,9 @@ package net.wengs.drawnothing;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.IOUtils;
@@ -17,14 +19,14 @@ public class DrawNothing {
 	private int answerMinLength = 3;
 	private int answerMaxLength = 8;
 
-	private List<String>[] dicts;
+	private Set<String>[] dicts;
 
 	public DrawNothing() throws IOException {
 		initDicts();
 	}
 
 	public Collection<String> riddle(String givenLetters, int answerWordLength) {
-		List<String> dict = dicts[answerWordLength - answerMinLength];
+		Set<String> dict = dicts[answerWordLength - answerMinLength];
 		Collection<String> answers = new ArrayList<String>();
 
 		Collection<Character> candidates = toCollection(givenLetters.toLowerCase());
@@ -41,16 +43,29 @@ public class DrawNothing {
 
 	@SuppressWarnings("unchecked")
 	private void initDicts() throws IOException {
-		List<String> words = IOUtils.readLines(DrawNothing.class
-				.getResourceAsStream("words.txt"));
-
-		dicts = new ArrayList[answerMaxLength - answerMinLength + 1];
+		dicts = new LinkedHashSet[answerMaxLength - answerMinLength + 1];
 		for (int i = answerMinLength; i <= answerMaxLength; i++) {
-			dicts[i - answerMinLength] = new ArrayList<String>();
+			dicts[i - answerMinLength] = new LinkedHashSet<String>();
 		}
 
+		List<String> words;
+		words = IOUtils.readLines(getClass().getResourceAsStream(
+				"freqwords.txt"));
+		addDict(words);
+
+		words = IOUtils.readLines(getClass().getResourceAsStream("words.txt"));
+		addDict(words);
+	}
+
+	private void addDict(List<String> words) {
+		int dictCount = dicts.length;
+		int dictIndex;
+
 		for (String word : words) {
-			dicts[word.length() - answerMinLength].add(word.toLowerCase());
+			dictIndex = word.length() - answerMinLength;
+			if (dictIndex > 0 && dictIndex < dictCount) {
+				dicts[dictIndex].add(word.toLowerCase());
+			}
 		}
 	}
 
