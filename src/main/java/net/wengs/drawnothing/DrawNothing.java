@@ -1,6 +1,7 @@
 package net.wengs.drawnothing;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -48,13 +49,18 @@ public class DrawNothing {
 			dicts[i - answerMinLength] = new LinkedHashSet<String>();
 		}
 
-		List<String> words;
-		words = IOUtils.readLines(getClass().getResourceAsStream(
-				"freqwords.txt"));
-		addDict(words);
+		addDict("freqwords.txt");
+		addDict("words.txt");
+	}
 
-		words = IOUtils.readLines(getClass().getResourceAsStream("words.txt"));
-		addDict(words);
+	private void addDict(String dictName) throws IOException {
+		InputStream input = getClass().getResourceAsStream(dictName);
+		try {
+			List<String> words = IOUtils.readLines(input);
+			addDict(words);
+		} finally {
+			IOUtils.closeQuietly(input);
+		}
 	}
 
 	private void addDict(List<String> words) {
