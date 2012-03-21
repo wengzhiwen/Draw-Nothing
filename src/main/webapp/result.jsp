@@ -2,7 +2,7 @@
 <%@ page import="net.wengs.drawnothing.*" %>
 <%@ page import="java.util.*" %>
 <jsp:useBean id="drawNothing" class="net.wengs.drawnothing.DrawNothing" scope="application" />
-<jsp:useBean id="translater" class="net.wengs.drawnothing.SdcvTranslater" scope="application" />
+<jsp:useBean id="translater" class="net.wengs.drawnothing.TranslaterWrapper" scope="application" />
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, user-scalable=no″">
