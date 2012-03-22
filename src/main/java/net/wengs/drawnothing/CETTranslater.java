@@ -13,11 +13,11 @@ import org.apache.commons.io.IOUtils;
 /**
  * @author Sutra Zhou
  */
-public class CET4Translater implements Translater{
+public class CETTranslater implements Translater{
 
 	private Map<String, String> dict;
 
-	public CET4Translater() {
+	public CETTranslater() {
 		try {
 			initDict();
 		} catch (IOException e) {
@@ -38,8 +38,12 @@ public class CET4Translater implements Translater{
 	 */
 	private void initDict() throws IOException {
 		dict = new HashMap<String, String>();
+		addDict("cet4.txt");
+		addDict("cet6.txt");
+	}
 
-		InputStream input = getClass().getResourceAsStream("cet4.txt");
+	private void addDict(String dictName) throws IOException {
+		InputStream input = getClass().getResourceAsStream(dictName);
 		try {
 			Reader reader = new InputStreamReader(input, "UTF-8");
 			LineNumberReader lnr = new LineNumberReader(reader);
@@ -48,7 +52,7 @@ public class CET4Translater implements Translater{
 			while ((line = lnr.readLine()) != null) {
 				seperatorIndex = line.indexOf(" ");
 				dict.put(line.substring(0, seperatorIndex),
-						line.substring(seperatorIndex + 1, line.length()));
+						line.substring(seperatorIndex + 1, line.length()).trim());
 			}
 		} finally {
 			IOUtils.closeQuietly(input);

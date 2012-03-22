@@ -5,7 +5,7 @@ package net.wengs.drawnothing;
  */
 public class TranslaterWrapper implements Translater {
 
-	private CET4Translater cet4Translater;
+	private CETTranslater cetTranslater;
 
 	private SdcvTranslater sdcvTranslater;
 
@@ -13,7 +13,7 @@ public class TranslaterWrapper implements Translater {
 	 *
 	 */
 	public TranslaterWrapper() {
-		cet4Translater = new CET4Translater();
+		cetTranslater = new CETTranslater();
 		sdcvTranslater = new SdcvTranslater();
 	}
 
@@ -21,7 +21,7 @@ public class TranslaterWrapper implements Translater {
 	 * {@inheritDoc}
 	 */
 	public String translate(String word) {
-		String s = cet4Translater.translate(word);
+		String s = cetTranslater.translate(word);
 		if (s == null) {
 			s = sdcvTranslater.translate(word);
 		}
