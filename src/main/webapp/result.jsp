@@ -82,6 +82,7 @@ $("#resultpage").live("pageinit",function(event){
 });
 }
 </script>
+<jsp:include page="/google-analytics.jsp" />
 </body>
 </html>
 
