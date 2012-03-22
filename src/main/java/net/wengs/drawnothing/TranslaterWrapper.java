@@ -5,7 +5,7 @@ package net.wengs.drawnothing;
  */
 public class TranslaterWrapper implements Translater {
 
-	private CET4Translater cet4Translater;
+	private CETTranslater cet4Translater;
 
 	private SdcvTranslater sdcvTranslater;
 
@@ -13,7 +13,7 @@ public class TranslaterWrapper implements Translater {
 	 *
 	 */
 	public TranslaterWrapper() {
-		cet4Translater = new CET4Translater();
+		cet4Translater = new CETTranslater();
 		sdcvTranslater = new SdcvTranslater();
 	}
 
