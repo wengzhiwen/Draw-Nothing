@@ -46,7 +46,6 @@ public class CET4Translater implements Translater{
 			String line;
 			int seperatorIndex;
 			while ((line = lnr.readLine()) != null) {
-				System.out.println(line);
 				seperatorIndex = line.indexOf(" ");
 				dict.put(line.substring(0, seperatorIndex),
 						line.substring(seperatorIndex + 1, line.length()));
