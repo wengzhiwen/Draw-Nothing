@@ -63,17 +63,17 @@
 	<script>
 	$("#resultpage").live("pageshow",function(event) {
 		$(window).bind("scroll", function(event) {
-			translateShowen($(window).height() + $(window).scrollTop());
+			translate($(window).height() + $(window).scrollTop());
 		});
 
-		translateShowen($(window).height());
+		translate($(window).height());
 	});
 
-	function translateShowen(postion) {
+	function translate(position) {
 		$(".trans").each(function() {
 			if($(this).attr("isTraned") === "0") {
 				var answer = $(this).attr("answer");
-				if(postion > $(this).offset().top) {
+				if(position > $(this).offset().top) {
 					var answer = $(this).attr("answer");
 					$.ajax({
 						url: "translate.jsp?word=" + answer,
