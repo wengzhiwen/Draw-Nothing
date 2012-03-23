@@ -5,7 +5,7 @@
 <jsp:useBean id="cetTranslater" class="net.wengs.drawnothing.CETTranslater" scope="application" />
 <html>
 <head>
-	<meta name="viewport" content="width=device-width, user-scalable=no″">
+	<meta name="viewport" content="width=device-width, user-scalable=no">
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />
 	<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
@@ -60,25 +60,26 @@
 			<li>in <%=end - start%>ms</li>
 		</ul>
 	</div><!-- /content -->
+	<script>
+	$("#resultpage").live("pageshow",function(event){
+		alert("aa");
+		$(".trans").each(function(index) {
+			var answer = $(this).attr("answer");
 
-
-</div><!-- /page -->
-<script>
-$("#resultpage").live("pageinit",function(event){
-	$(".trans").each(function(index) {
-		var answer = $(this).attr("answer");
-
-		$.ajax({
-			url: "translate.jsp?word=" + answer,
-			dataType: "html",
-			success: function(data) {
-				$("#trans_" + index).append(data);
-			}
+			$.ajax({
+				url: "translate.jsp?word=" + answer,
+				dataType: "html",
+				success: function(data) {
+					$("#trans_" + index).append(data);
+				}
+			});
 		});
 	});
-});
-</script>
-<jsp:include page="/google-analytics.jsp" />
+	</script>
+	<jsp:include page="/google-analytics.jsp" />
+
+</div><!-- /page -->
+
 </body>
 </html>
 
