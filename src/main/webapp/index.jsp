@@ -45,6 +45,9 @@
 	<div data-role="footer">
 		<h4>Powered by @zhoushuqun & @718w</h4>
 	</div>
+
+	<jsp:include page="/google-analytics.jsp" />
+
 </div><!-- /page -->
 
 <script type="text/javascript">
@@ -58,6 +61,6 @@
 	}
 
 </script>
-<jsp:include page="/google-analytics.jsp" />
+
 </body>
 </html>

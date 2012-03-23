@@ -75,6 +75,7 @@
 		});
 	});
 	</script>
+
 	<jsp:include page="/google-analytics.jsp" />
 
 </div><!-- /page -->
