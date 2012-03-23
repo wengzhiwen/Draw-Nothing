@@ -63,24 +63,30 @@
 	<script>
 	$("#resultpage").live("pageshow",function(event) {
 		$(window).bind("scroll", function(event) {
-			$(".trans").each(function() {
-				if($(this).attr("isTraned") === "0") {
-					var answer = $(this).attr("answer");
-					if($(window).height() + $(window).scrollTop() > $(this).offset().top) {
-						var answer = $(this).attr("answer");
-						$.ajax({
-							url: "translate.jsp?word=" + answer,
-							dataType: "html",
-							success: function(data) {
-								$("#trans_" + answer).append(data);
-							}
-						});
-						$(this).attr("isTraned", "1");
-					}
-				}
-			});
+			translateShowen($(window).height() + $(window).scrollTop());
 		});
+
+		translateShowen($(window).height());
 	});
+
+	function translateShowen(postion) {
+		$(".trans").each(function() {
+			if($(this).attr("isTraned") === "0") {
+				var answer = $(this).attr("answer");
+				if(postion > $(this).offset().top) {
+					var answer = $(this).attr("answer");
+					$.ajax({
+						url: "translate.jsp?word=" + answer,
+						dataType: "html",
+						success: function(data) {
+							$("#trans_" + answer).append(data);
+						}
+					});
+					$(this).attr("isTraned", "1");
+				}
+			}
+		});
+	}
 	</script>
 
 	<jsp:include page="/google-analytics.jsp" />
