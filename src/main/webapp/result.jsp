@@ -66,11 +66,12 @@
 			$(".trans").each(function(){
 				if($(this).attr("isTraned") == "0") {
 					if( $(window).height() + $(window).scrollTop() > $(this).offset().top){
+						var answer = $(this).attr("answer");
 						$.ajax({
-							url: "translate.jsp?word=" + $(this).attr("answer"),
+							url: "translate.jsp?word=" + answer,
 							dataType: "html",
 							success: function(data) {
-								$("#trans_" + $(this).attr("answer")).append(data);
+								$("#trans_" + answer).append(data);
 							}
 						});
 						$(this).attr("isTraned", "1");
