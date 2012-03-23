@@ -65,12 +65,13 @@
 		$(window).bind("scroll", function(event){
 			$(".trans").each(function(){
 				if($(this).attr("isTraned") == "0") {
+					answer = $(this).attr("answer");
 					if( $(window).height() + $(window).scrollTop() > $(this).offset().top){
 						$.ajax({
-							url: "translate.jsp?word=" + $(this).attr("answer"),
+							url: "translate.jsp?word=" + answer,
 							dataType: "html",
 							success: function(data) {
-								$("#trans_" + $(this).attr("answer")).append(data);
+								$("#trans_" + answer).append(data);
 							}
 						});
 						$(this).attr("isTraned", "1");
