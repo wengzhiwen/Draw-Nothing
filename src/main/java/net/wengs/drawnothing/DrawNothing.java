@@ -69,7 +69,7 @@ public class DrawNothing {
 
 		for (String word : words) {
 			dictIndex = word.length() - answerMinLength;
-			if (dictIndex > 0 && dictIndex < dictCount) {
+			if (dictIndex >= 0 && dictIndex < dictCount) {
 				dicts[dictIndex].add(word.toLowerCase());
 			}
 		}
