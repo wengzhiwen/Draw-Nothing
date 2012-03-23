@@ -49,7 +49,7 @@
 				if (text != null) {
 					out.print("<p>" + text + "</p>");
 				} else {
-					out.print("<p answer='" + answer + "' class='trans' id='trans_" + (transIndex++) + "'></p>");
+					out.print("<p isTraned='0' answer='" + answer + "' class='trans' id='trans_" + answer + "'></p>");
 				}
 				%>
 			</li>
@@ -62,14 +62,19 @@
 	</div><!-- /content -->
 	<script>
 	$("#resultpage").live("pageshow",function(event){
-		$(".trans").each(function(index) {
-			var answer = $(this).attr("answer");
-
-			$.ajax({
-				url: "translate.jsp?word=" + answer,
-				dataType: "html",
-				success: function(data) {
-					$("#trans_" + index).append(data);
+		$(window).bind("scroll", function(event){
+			$(".trans").each(function(){
+				if($(this).attr("isTraned") == "0") {
+					if( $(window).height() + $(window).scrollTop() > $(this).offset().top){
+						$.ajax({
+							url: "translate.jsp?word=" + $(this).attr("answer"),
+							dataType: "html",
+							success: function(data) {
+								$("#trans_" + $(this).attr("answer")).append(data);
+							}
+						});
+						$(this).attr("isTraned", "1");
+					}
 				}
 			});
 		});
