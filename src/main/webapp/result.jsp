@@ -62,7 +62,6 @@
 	</div><!-- /content -->
 	<script>
 	$("#resultpage").live("pageshow",function(event){
-		alert("aa");
 		$(".trans").each(function(index) {
 			var answer = $(this).attr("answer");
 
