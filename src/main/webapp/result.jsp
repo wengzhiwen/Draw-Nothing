@@ -2,7 +2,7 @@
 <%@ page import="net.wengs.drawnothing.*" %>
 <%@ page import="java.util.*" %>
 <jsp:useBean id="drawNothing" class="net.wengs.drawnothing.DrawNothing" scope="application" />
-<jsp:useBean id="translater" class="net.wengs.drawnothing.TranslaterWrapper" scope="application" />
+<jsp:useBean id="cetTranslater" class="net.wengs.drawnothing.CETTranslater" scope="application" />
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, user-scalable=no″">
@@ -37,50 +37,46 @@
 			long end = System.currentTimeMillis();
 
 			long translateStart = System.currentTimeMillis();
+
+			int transIndex = 0;
+			String text;
 			for(String answer : answers) {
+				text = cetTranslater.translate(answer);
 			%>
 			<li>
-				<a href="http://www.wordreference.com/enzh/<%=answer%>" rel="external">
-					<h3><%=answer%></h3>
-					<p result="<%=answer%>" class="trans" id="trans<%=answer%>">
-						<%
-						try {
-							out.print(translater.translate(answer));
-						} catch (Exception e) {
-							out.print("Translate failed");
-						}
-						%>
-					</p>
-				</a>
+				<h3><%=answer%></h3>
+				<%
+				if (text != null) {
+					out.print("<p>" + text + "</p>");
+				} else {
+					out.print("<p answer='" + answer + "' class='trans' id='trans_" + (transIndex++) + "'></p>");
+				}
+				%>
 			</li>
 			<%
 			}
 			long translateEnd = System.currentTimeMillis();
 			%>
-			<li>in <%=end - start%>ms, translated in <%=translateEnd - translateStart%>ms</li>
+			<li>in <%=end - start%>ms</li>
 		</ul>
 	</div><!-- /content -->
 
 
 </div><!-- /page -->
 <script>
-if(0==1){
 $("#resultpage").live("pageinit",function(event){
 	$(".trans").each(function(index) {
-		resultString = $(this).attr("result");
+		var answer = $(this).attr("answer");
 
 		$.ajax({
-			url: "http://fy.webxml.com.cn/webservices/EnglishChinese.asmx/TranslatorString?wordKey=" + resultString,
-			dataType: "xml",
-			success: function(data){
-				$(data).find("string").each(function(i, str) {
-					$("#trans" + resultString).append($(str).text() + "<br />");
-				})
+			url: "translate.jsp?word=" + answer,
+			dataType: "html",
+			success: function(data) {
+				$("#trans_" + index).append(data);
 			}
 		});
 	});
 });
-}
 </script>
 <jsp:include page="/google-analytics.jsp" />
 </body>
