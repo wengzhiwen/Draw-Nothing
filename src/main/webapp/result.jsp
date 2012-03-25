@@ -61,6 +61,7 @@
 		</ul>
 	</div><!-- /content -->
 	<script>
+	<%--
 	$("#resultpage").live("pageshow",function(event) {
 		$(window).bind("scroll", function(event) {
 			translate($(window).height() + $(window).scrollTop());
@@ -72,7 +73,6 @@
 	function translate(position) {
 		$(".trans").each(function() {
 			if($(this).attr("isTraned") === "0") {
-				var answer = $(this).attr("answer");
 				if(position > $(this).offset().top) {
 					var answer = $(this).attr("answer");
 					$.ajax({
@@ -87,6 +87,22 @@
 			}
 		});
 	}
+	--%>
+	function translateAll() {
+		$(".trans").each(function() {
+			var answer = $(this).attr("answer");
+			$.ajax({
+				url: "sdcv-translate.jsp?word=" + answer,
+				dataType: "html",
+				success: function(data) {
+					$("#trans_" + answer).append(data);
+				}
+			});
+		});
+	}
+	$("#resultpage").live("pageshow", function(event) {
+		translateAll();
+	});
 	</script>
 
 	<jsp:include page="/google-analytics.jsp" />
