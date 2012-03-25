@@ -76,7 +76,7 @@
 				if(position > $(this).offset().top) {
 					var answer = $(this).attr("answer");
 					$.ajax({
-						url: "translate.jsp?word=" + answer,
+						url: "sdcv-translate.jsp?word=" + answer,
 						dataType: "html",
 						success: function(data) {
 							$("#trans_" + answer).append(data);
